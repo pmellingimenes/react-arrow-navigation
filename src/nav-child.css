@@ -1,0 +1,15 @@
+.child {
+  background-color: lightseagreen;
+  color: gold;
+  font-size: 22px;
+  font-style: bold;
+  flex-grow: 1;
+  text-align: center;
+  margin: 10px;
+  padding: 24px 6px;
+}
+
+.selectedChild {
+  background-color: lightcoral;
+  color: white;
+}
