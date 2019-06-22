@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
+import './app.css'
+import DropdownMenu from './dropdown-menu'
 
-import ExampleComponent from 'react-arrow-navigation'
-
-export default class App extends Component {
-  render () {
+function App() {
     return (
-      <div>
-        <ExampleComponent text='Modern React component module' />
-      </div>
+        <div className="app">
+            <DropdownMenu
+                labels={['now you can', 'navigate through', 'the menu items', 'with arrow keys']}
+            />
+        </div>
     )
-  }
 }
+
+export default App

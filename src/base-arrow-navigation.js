@@ -28,7 +28,7 @@ function BaseArrowNavigation({
 
     useEffect(() => {
         if (reInitOnDeactivate && !active) {
-            dispatch({ type: 'resetIndicies' })
+            dispatch({ type: 'resetIndexes' })
         }
     }, [active, dispatch, reInitOnDeactivate, initialXIndex, initialYIndex])
 

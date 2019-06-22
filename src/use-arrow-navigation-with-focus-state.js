@@ -1,9 +1,9 @@
 import { useRef, useContext, useEffect } from 'react'
 import useArrowNavigation from './use-arrow-navigation'
-import { ArrowNavigationContext } from './'
+import { ArrowNavigationContext } from './arrow-navigation'
 
 export default function useArrowNavigationWithFocusState(x, y) {
-    const { selected, active } = useArrowNavigation(x, y)
+    const { selected, active, select } = useArrowNavigation(x, y)
     const dispatch = useContext(ArrowNavigationContext)
     const ref = useRef()
 
@@ -25,6 +25,10 @@ export default function useArrowNavigationWithFocusState(x, y) {
         }
     }, [x, y, selected, active, dispatch])
 
-    const focusProps = { ref, tabIndex: selected ? 0 : undefined }
+    const focusProps = {
+        ref,
+        tabIndex: selected ? 0 : -1,
+        onClick: select,
+    }
     return { selected, active, focusProps }
 }

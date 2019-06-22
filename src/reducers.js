@@ -85,12 +85,14 @@ export function baseArrowNavigationreducer(state, { type, payload }) {
                       ...state,
                       ...findNextYIndex(xIndex, yIndex, payload.delta, matrix, mode),
                   }
-        case 'resetIndicies':
+        case 'resetIndexes':
             return { ...state, xIndex: initialXIndex, yIndex: initialYIndex }
-
-        // to do: use invariant or equivalent here
+        case 'setIndexes': {
+            const { x, y } = payload
+            return { ...state, xIndex: x, yIndex: y }
+        }
         default:
-            console.log(`${payload.type} does not exist`)
+            throw new Error(`Action type ${type} does not exist`)
     }
 }
 
@@ -116,8 +118,7 @@ export function arrowNavigationReducer(state, { type, payload }) {
                 childTabIndex: x === currentX && y === currentY ? undefined : state.childTabIndex,
             }
         }
-        // to do: use invariant or equivalent here
         default:
-            console.log(`${payload.type} does not exist`)
+            throw new Error(`Action type ${type} does not exist`)
     }
 }

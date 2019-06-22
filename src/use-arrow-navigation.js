@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useCallback } from 'react'
 import { BaseArrowNavigationContext } from './base-arrow-navigation'
 
 export default function useArrowNavigation(x, y = 0) {
@@ -13,5 +13,13 @@ export default function useArrowNavigation(x, y = 0) {
     }, [x, y, dispatch])
 
     const selected = x === xIndex && y === yIndex
-    return { selected, active }
+    const memoizedSelect = useCallback(() => {
+        dispatch({ type: 'setIndexes', payload: { x, y } })
+    }, [dispatch, x, y])
+
+    return {
+        selected,
+        active,
+        select: memoizedSelect,
+    }
 }
