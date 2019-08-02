@@ -39,7 +39,7 @@ const MyApp = () => (
 - `selected`: whether this index is currently selected
 - `active`: whether this `ArrowNavigation` component is currently focused
 
-This gives you the flexibility to implement several different forms of navigation state. For example:
+This gives you flexibilty when implementing navigable components. For example:
 - A button group: you might want the button to stay in a selected state even when the button group is not focused
 - A drop down menu: the menu items would only need to be in a selected state when the dropdown is focused/open
 
@@ -54,7 +54,7 @@ You may also want to be able to update the navigation state when a component is 
 
 When this happens you want the navigation index to be updated on click, so when they use the arrow keys again the index is correct.
 
-To achieve this we can use the `select` callback `useArrowNavigation` returns:
+To achieve this we can use the `select` callback provided by `useArrowNavigation`:
 
 ```jsx
 const ButtonGroupButton = ({ xIndex }) => {
@@ -81,14 +81,14 @@ To toggle the `active` state, `ArrowNavigation` returns a containing `<div>`, an
 
 Additional props passed to `ArrowNavigation` are spread on to the `<div>`. This includes support for a `ref` prop, implemented with [React.forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref).
 
-If you want to opt-out and manage the `active` state yourself, use [`BaseArrowNavigation`](#BaseArrowNavigation). It has an `active` prop that is passed to the navigable components. It does not insert a containing `<div>`.
+If you want to opt-out and manage the `active` state yourself, use [`BaseArrowNavigation`](#BaseArrowNavigation). Its `active` state is determined by its `active` prop. It does not insert a containing `<div>`.
 
 
 ### Managing the focus state of navigable components
 
-Sometimes you will want navigable components to be focused when they are selected. There are behaviors built in to browsers you might want to leverage (`onClick` being fired when the user hits the Enter key), and it's also good for acessibility: screen readers rely on the focus state.
+Sometimes you will want navigable components to be focused when they are selected. There are behaviors built into browsers you might want to leverage (`onClick` being fired when the user hits the Enter key), and it's also good for acessibility: screen readers rely on the focus state.
 
-To enable this there is a hook: `useArrowNavigationWithFocusState`. It returns the same values as `useArrowNaviation` and also `focusProps`, which you then spread onto the navigable component. `focusProps` is comprised of `tabIndex`, `onClick`, and `ref`. In more complex cases you may want to access these props directly: e.g. you need to something else in the click handler.
+To enable this there is a hook: `useArrowNavigationWithFocusState`.  It returns an additional value: `focusProps`, which is spread onto the navigable component. `focusProps` is comprised of `tabIndex`, `onClick`, and `ref`. In more complex cases you may want to access these props directly: e.g. you need to do something else in the click handler.
 
 Here is a dropdown menu implemented with it:
 
@@ -204,7 +204,7 @@ Props:
 
 - `...divProps`
 
-  All other props passed to `ArrowNavigation` are passed onto the `div` it returns. This includes support for the `ref` prop using `React.forwardRef`.
+  All other props passed to `ArrowNavigation` are passed onto the `div` it returns. This includes support for the `ref` prop.
 
 
 ### useArrowNavigation(x: number, y: number)
@@ -237,15 +237,15 @@ Returned values:
   `focusProps` should be spread onto the navigable component. They will:
 
   - Set the `tabIndex` to `0` if it is selected and `-1` otherwise
-  - Focus the component when its index is selected, _and_ `active` is true
-  - Set the selected index to this one when clicked
+  - Focus the component when its index is selected, _and_ `active` is `true`
+  - Set the selected index to this one on click
   
   In complex cases you may want to access these props directly, e.g. if you need to do another thing in the component's click handler:
   
   ```jsx
       onClick={() => {
           // Click handler logic goes here
-          onClick() // Then call the onClick from `focusProps`
+          onClick() // Then call the onClick callback from `focusProps`
       }}
    ```
 
