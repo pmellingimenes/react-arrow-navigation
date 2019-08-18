@@ -35,11 +35,10 @@ const ArrowNavigation = React.forwardRef(
                 tabIndex={childTabIndex ? undefined : 0}
                 ref={ref}
                 onFocus={() => dispatch({ type: 'activate' })}
-                onBlur={e => {
+                onBlur={({ relatedTarget }) => {
                     if (
                         ref.current &&
-                        e.relatedTarget !== null &&
-                        !ref.current.contains(e.relatedTarget)
+                        ((relatedTarget && !ref.current.contains(relatedTarget)) || !relatedTarget)
                     ) {
                         dispatch({ type: 'deactivate' })
                     }
