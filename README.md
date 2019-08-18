@@ -225,7 +225,7 @@ Returned values:
   A callback that updates the selected index to this one
 
 
-### useArrowNavigationWithFocusState
+### useArrowNavigationWithFocusState(x: number, y: number)
 
 The `useArrowNavigation` hook takes two arguments: an x and y navigation index. It is not compatible with `BaseArrowNavigation`.
 
