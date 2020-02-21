@@ -37,6 +37,11 @@ function BaseArrowNavigation({
     useKey('ArrowUp', () => active && dispatch({ type: 'updateYIndex', payload: { delta: -1 } }))
     useKey('ArrowDown', () => active && dispatch({ type: 'updateYIndex', payload: { delta: 1 } }))
 
+    useKey('Left', () => active && dispatch({ type: 'updateXIndex', payload: { delta: -1 } }))
+    useKey('Right', () => active && dispatch({ type: 'updateXIndex', payload: { delta: 1 } }))
+    useKey('Up', () => active && dispatch({ type: 'updateYIndex', payload: { delta: -1 } }))
+    useKey('Down', () => active && dispatch({ type: 'updateYIndex', payload: { delta: 1 } }))
+
     const contextValue = { xIndex, yIndex, active, dispatch }
     return (
         <BaseArrowNavigationContext.Provider value={contextValue}>
